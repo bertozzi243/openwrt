@@ -12,7 +12,7 @@ PKG_SOURCE_URL:=https://github.com/chunkeey/FritzBox-4040-UBOOT
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_VERSION:=6946ebbaf7b12a4a092d763c8f0c87a25984f103
 PKG_SOURCE_DATE:=2017-01-29
-PKG_MIRROR_HASH:=5c2394f51a083dca2a2bf9cb36fa717f252112fc792c9eeae64f6383ad08987b
+PKG_MIRROR_HASH:=4f3f5d9e3f047910d2bbd31325cc622c3dd64662c20ea740b27ac4bef9736a34
 
 PKG_RELEASE:=1
 
@@ -35,8 +35,8 @@ export DTC
 
 define Build/Configure
 	$(Build/Configure/U-Boot)
-	$(HOSTCC) -o $(PKG_BUILD_DIR)/fritz/lzma2eva $(PKG_BUILD_DIR)/fritz/src/lzma2eva.c -lz
-	$(HOSTCC) -o $(PKG_BUILD_DIR)/fritz/tichksum $(PKG_BUILD_DIR)/fritz/src/tichksum.c
+	$(HOSTCC) $(HOST_CFLAGS) $(HOST_LDFLAGS) -o $(PKG_BUILD_DIR)/fritz/lzma2eva $(PKG_BUILD_DIR)/fritz/src/lzma2eva.c -lz
+	$(HOSTCC) $(HOST_CFLAGS) $(HOST_LDFLAGS) -o $(PKG_BUILD_DIR)/fritz/tichksum $(PKG_BUILD_DIR)/fritz/src/tichksum.c
 	ln -sf $(STAGING_DIR_HOST)/bin/lzma $(PKG_BUILD_DIR)/fritz
 	ln -sf compiler-gcc5.h $(PKG_BUILD_DIR)/include/linux/compiler-gcc7.h
 endef
